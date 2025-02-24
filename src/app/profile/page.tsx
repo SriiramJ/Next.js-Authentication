@@ -4,8 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import {toast} from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { log } from "console";
-import { get } from "http";
 export default function ProfilePage() {
     const router = useRouter();
     const [data, setData] = useState("nothing")
@@ -27,17 +25,30 @@ export default function ProfilePage() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1>Profile Page</h1>
-            <h2 className="p-1 mt-1 rounded bg-green-500">{data === 'nothing' ? "Nothing" : <Link href={`/profile/${data}`}>{data}</Link>}</h2>
-            <hr />
-            <button 
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-2">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md text-center">
+          <h1 className="text-4xl font-bold mb-4">Profile Page</h1>
+          <h2 className="p-2 mt-2 rounded bg-green-500 text-white">
+            {data === "nothing" ? (
+              "Nothing"
+            ) : (
+              <Link href={`/profile/${data}`}>{data}</Link>
+            )}
+          </h2>
+          <hr className="my-4" />
+          <button
             onClick={logout}
-            className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Logout</button>
-
-            <button 
+            className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+          >
+            Logout
+          </button>
+          <button
             onClick={getUserDetails}
-            className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">User</button>
+            className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+          >
+            Get User Details
+          </button>
         </div>
+      </div>
     );    
 }
