@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/eslint-plugin-next": "^15.1.7",
     "axios": "^1.7.9",
     "bcryptjs": "^3.0.1",
     "jsonwebtoken": "^9.0.2",
