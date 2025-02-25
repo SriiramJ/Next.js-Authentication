@@ -50,8 +50,8 @@ export async function POST(request: NextRequest) {
       status: 201,
       statusText: "Successfully created User",
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error creating user:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }
 }

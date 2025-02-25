@@ -16,8 +16,12 @@ export default function ResetPasswordPage() {
       await axios.post("/api/users/resetpassword", { token, password });
       toast.success("Password reset successful");
       router.push("/login");
-    } catch (error: any) {
-      toast.error(error.response.data.error);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error("An unexpected error occurred");
+      }
     } finally {
       setLoading(false);
     }

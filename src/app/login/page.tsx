@@ -23,9 +23,13 @@ export default function LoginPage() {
       console.log("Login success", response.data);
       toast.success("Login success");
       router.push("/profile");
-    } catch (error: any) {
-      console.log("Login failed", error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log("Login failed", error.message);
+      } else {
+        console.log("Login failed", error);
+      }
+      toast.error((error as Error).message);
     } finally {
       setLoading(false);
     }
@@ -37,15 +41,19 @@ export default function LoginPage() {
       await axios.post("/api/users/forgotpassword", { email: forgotEmail });
       toast.success("Password reset email sent");
       setShowModal(false);
-    } catch (error: any) {
-      toast.error(error.response.data.error);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error("An unexpected error occurred");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (user.email.length > 0 && user.password.length > 0) {``
+    if (user.email.length > 0 && user.password.length > 0) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
@@ -98,7 +106,7 @@ export default function LoginPage() {
           {loading ? "Processing..." : "Login"}
         </button>
         <p className="text-sm text-gray-600">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/signup" className="text-blue-500 hover:underline">
             Sign up
           </Link>
