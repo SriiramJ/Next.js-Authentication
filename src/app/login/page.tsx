@@ -75,7 +75,7 @@ export default function LoginPage() {
           Email
         </label>
         <input
-          className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-500 w-full"
+          className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-500 w-full text-black"
           id="email"
           type="text"
           value={user.email}
